@@ -1,0 +1,17 @@
+type Query {
+  companyByTicker(ticker: String!): Company
+}
+
+type Mutation {
+  getCompany(ticker: String!): Company!
+}
+
+type Company {
+  id: ID!
+  ticker: String!
+  marketCap: String!
+  enterpriseVal: String!
+  trailingPE: String!
+  forwardPE: String!
+  pegRatio: String!
+}

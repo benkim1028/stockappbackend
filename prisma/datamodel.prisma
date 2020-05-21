@@ -1,0 +1,10 @@
+type Company {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  ticker: String! @unique
+  marketCap: String!
+  enterpriseVal: String!
+  trailingPE: String!
+  forwardPE: String!
+  pegRatio: String!
+}
