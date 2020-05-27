@@ -1,9 +1,20 @@
 type Query {
-  companyByTicker(ticker: String!): Company
+  getCompanyByTicker(ticker: String!, watchlistName: String!): Company
+  getCompaniesByWatchlistName(name: String!): [Company]
+  getWatchlistByName(username: String!) : [WatchList]
+  getUser(username: String!) : User
 }
 
 type Mutation {
   getCompany(ticker: String!): Company!
+  createWatchList(name: String!, username: String!) : WatchList!
+  createUser(username: String!) : User!
+}
+
+type User {
+  id: ID!
+  username: String!
+  watchLists: [WatchList]
 }
 
 type Company {
@@ -14,4 +25,11 @@ type Company {
   trailingPE: String!
   forwardPE: String!
   pegRatio: String!
+}
+
+type WatchList {
+  id: ID!
+  name: String!
+  companies: [Company]
+  user: User
 }

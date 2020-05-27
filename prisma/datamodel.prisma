@@ -8,3 +8,16 @@ type Company {
   forwardPE: String!
   pegRatio: String!
 }
+
+type WatchList {
+  id: ID! @id
+  name: String! @unique
+  companies: [Company]
+  user: User
+}
+
+type User {
+  id: ID! @id
+  username: String! @unique
+  watchLists: [WatchList]
+}

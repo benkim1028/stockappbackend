@@ -7,6 +7,14 @@ module.exports = {
   count: Int!
 }
 
+type AggregateUser {
+  count: Int!
+}
+
+type AggregateWatchList {
+  count: Int!
+}
+
 type BatchPayload {
   count: Long!
 }
@@ -36,6 +44,11 @@ input CompanyCreateInput {
   trailingPE: String!
   forwardPE: String!
   pegRatio: String!
+}
+
+input CompanyCreateManyInput {
+  create: [CompanyCreateInput!]
+  connect: [CompanyWhereUniqueInput!]
 }
 
 type CompanyEdge {
@@ -73,6 +86,118 @@ type CompanyPreviousValues {
   pegRatio: String!
 }
 
+input CompanyScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  ticker: String
+  ticker_not: String
+  ticker_in: [String!]
+  ticker_not_in: [String!]
+  ticker_lt: String
+  ticker_lte: String
+  ticker_gt: String
+  ticker_gte: String
+  ticker_contains: String
+  ticker_not_contains: String
+  ticker_starts_with: String
+  ticker_not_starts_with: String
+  ticker_ends_with: String
+  ticker_not_ends_with: String
+  marketCap: String
+  marketCap_not: String
+  marketCap_in: [String!]
+  marketCap_not_in: [String!]
+  marketCap_lt: String
+  marketCap_lte: String
+  marketCap_gt: String
+  marketCap_gte: String
+  marketCap_contains: String
+  marketCap_not_contains: String
+  marketCap_starts_with: String
+  marketCap_not_starts_with: String
+  marketCap_ends_with: String
+  marketCap_not_ends_with: String
+  enterpriseVal: String
+  enterpriseVal_not: String
+  enterpriseVal_in: [String!]
+  enterpriseVal_not_in: [String!]
+  enterpriseVal_lt: String
+  enterpriseVal_lte: String
+  enterpriseVal_gt: String
+  enterpriseVal_gte: String
+  enterpriseVal_contains: String
+  enterpriseVal_not_contains: String
+  enterpriseVal_starts_with: String
+  enterpriseVal_not_starts_with: String
+  enterpriseVal_ends_with: String
+  enterpriseVal_not_ends_with: String
+  trailingPE: String
+  trailingPE_not: String
+  trailingPE_in: [String!]
+  trailingPE_not_in: [String!]
+  trailingPE_lt: String
+  trailingPE_lte: String
+  trailingPE_gt: String
+  trailingPE_gte: String
+  trailingPE_contains: String
+  trailingPE_not_contains: String
+  trailingPE_starts_with: String
+  trailingPE_not_starts_with: String
+  trailingPE_ends_with: String
+  trailingPE_not_ends_with: String
+  forwardPE: String
+  forwardPE_not: String
+  forwardPE_in: [String!]
+  forwardPE_not_in: [String!]
+  forwardPE_lt: String
+  forwardPE_lte: String
+  forwardPE_gt: String
+  forwardPE_gte: String
+  forwardPE_contains: String
+  forwardPE_not_contains: String
+  forwardPE_starts_with: String
+  forwardPE_not_starts_with: String
+  forwardPE_ends_with: String
+  forwardPE_not_ends_with: String
+  pegRatio: String
+  pegRatio_not: String
+  pegRatio_in: [String!]
+  pegRatio_not_in: [String!]
+  pegRatio_lt: String
+  pegRatio_lte: String
+  pegRatio_gt: String
+  pegRatio_gte: String
+  pegRatio_contains: String
+  pegRatio_not_contains: String
+  pegRatio_starts_with: String
+  pegRatio_not_starts_with: String
+  pegRatio_ends_with: String
+  pegRatio_not_ends_with: String
+  AND: [CompanyScalarWhereInput!]
+  OR: [CompanyScalarWhereInput!]
+  NOT: [CompanyScalarWhereInput!]
+}
+
 type CompanySubscriptionPayload {
   mutation: MutationType!
   node: Company
@@ -91,6 +216,15 @@ input CompanySubscriptionWhereInput {
   NOT: [CompanySubscriptionWhereInput!]
 }
 
+input CompanyUpdateDataInput {
+  ticker: String
+  marketCap: String
+  enterpriseVal: String
+  trailingPE: String
+  forwardPE: String
+  pegRatio: String
+}
+
 input CompanyUpdateInput {
   ticker: String
   marketCap: String
@@ -100,6 +234,27 @@ input CompanyUpdateInput {
   pegRatio: String
 }
 
+input CompanyUpdateManyDataInput {
+  ticker: String
+  marketCap: String
+  enterpriseVal: String
+  trailingPE: String
+  forwardPE: String
+  pegRatio: String
+}
+
+input CompanyUpdateManyInput {
+  create: [CompanyCreateInput!]
+  update: [CompanyUpdateWithWhereUniqueNestedInput!]
+  upsert: [CompanyUpsertWithWhereUniqueNestedInput!]
+  delete: [CompanyWhereUniqueInput!]
+  connect: [CompanyWhereUniqueInput!]
+  set: [CompanyWhereUniqueInput!]
+  disconnect: [CompanyWhereUniqueInput!]
+  deleteMany: [CompanyScalarWhereInput!]
+  updateMany: [CompanyUpdateManyWithWhereNestedInput!]
+}
+
 input CompanyUpdateManyMutationInput {
   ticker: String
   marketCap: String
@@ -107,6 +262,22 @@ input CompanyUpdateManyMutationInput {
   trailingPE: String
   forwardPE: String
   pegRatio: String
+}
+
+input CompanyUpdateManyWithWhereNestedInput {
+  where: CompanyScalarWhereInput!
+  data: CompanyUpdateManyDataInput!
+}
+
+input CompanyUpdateWithWhereUniqueNestedInput {
+  where: CompanyWhereUniqueInput!
+  data: CompanyUpdateDataInput!
+}
+
+input CompanyUpsertWithWhereUniqueNestedInput {
+  where: CompanyWhereUniqueInput!
+  update: CompanyUpdateDataInput!
+  create: CompanyCreateInput!
 }
 
 input CompanyWhereInput {
@@ -237,6 +408,18 @@ type Mutation {
   upsertCompany(where: CompanyWhereUniqueInput!, create: CompanyCreateInput!, update: CompanyUpdateInput!): Company!
   deleteCompany(where: CompanyWhereUniqueInput!): Company
   deleteManyCompanies(where: CompanyWhereInput): BatchPayload!
+  createUser(data: UserCreateInput!): User!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  createWatchList(data: WatchListCreateInput!): WatchList!
+  updateWatchList(data: WatchListUpdateInput!, where: WatchListWhereUniqueInput!): WatchList
+  updateManyWatchLists(data: WatchListUpdateManyMutationInput!, where: WatchListWhereInput): BatchPayload!
+  upsertWatchList(where: WatchListWhereUniqueInput!, create: WatchListCreateInput!, update: WatchListUpdateInput!): WatchList!
+  deleteWatchList(where: WatchListWhereUniqueInput!): WatchList
+  deleteManyWatchLists(where: WatchListWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -260,11 +443,341 @@ type Query {
   company(where: CompanyWhereUniqueInput!): Company
   companies(where: CompanyWhereInput, orderBy: CompanyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Company]!
   companiesConnection(where: CompanyWhereInput, orderBy: CompanyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CompanyConnection!
+  user(where: UserWhereUniqueInput!): User
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  watchList(where: WatchListWhereUniqueInput!): WatchList
+  watchLists(where: WatchListWhereInput, orderBy: WatchListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [WatchList]!
+  watchListsConnection(where: WatchListWhereInput, orderBy: WatchListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WatchListConnection!
   node(id: ID!): Node
 }
 
 type Subscription {
   company(where: CompanySubscriptionWhereInput): CompanySubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  watchList(where: WatchListSubscriptionWhereInput): WatchListSubscriptionPayload
+}
+
+type User {
+  id: ID!
+  username: String!
+  watchLists(where: WatchListWhereInput, orderBy: WatchListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [WatchList!]
+}
+
+type UserConnection {
+  pageInfo: PageInfo!
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  id: ID
+  username: String!
+  watchLists: WatchListCreateManyWithoutUserInput
+}
+
+input UserCreateOneWithoutWatchListsInput {
+  create: UserCreateWithoutWatchListsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutWatchListsInput {
+  id: ID
+  username: String!
+}
+
+type UserEdge {
+  node: User!
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  username_ASC
+  username_DESC
+}
+
+type UserPreviousValues {
+  id: ID!
+  username: String!
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+  AND: [UserSubscriptionWhereInput!]
+  OR: [UserSubscriptionWhereInput!]
+  NOT: [UserSubscriptionWhereInput!]
+}
+
+input UserUpdateInput {
+  username: String
+  watchLists: WatchListUpdateManyWithoutUserInput
+}
+
+input UserUpdateManyMutationInput {
+  username: String
+}
+
+input UserUpdateOneWithoutWatchListsInput {
+  create: UserCreateWithoutWatchListsInput
+  update: UserUpdateWithoutWatchListsDataInput
+  upsert: UserUpsertWithoutWatchListsInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutWatchListsDataInput {
+  username: String
+}
+
+input UserUpsertWithoutWatchListsInput {
+  update: UserUpdateWithoutWatchListsDataInput!
+  create: UserCreateWithoutWatchListsInput!
+}
+
+input UserWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  username: String
+  username_not: String
+  username_in: [String!]
+  username_not_in: [String!]
+  username_lt: String
+  username_lte: String
+  username_gt: String
+  username_gte: String
+  username_contains: String
+  username_not_contains: String
+  username_starts_with: String
+  username_not_starts_with: String
+  username_ends_with: String
+  username_not_ends_with: String
+  watchLists_every: WatchListWhereInput
+  watchLists_some: WatchListWhereInput
+  watchLists_none: WatchListWhereInput
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+}
+
+input UserWhereUniqueInput {
+  id: ID
+  username: String
+}
+
+type WatchList {
+  id: ID!
+  name: String!
+  companies(where: CompanyWhereInput, orderBy: CompanyOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Company!]
+  user: User
+}
+
+type WatchListConnection {
+  pageInfo: PageInfo!
+  edges: [WatchListEdge]!
+  aggregate: AggregateWatchList!
+}
+
+input WatchListCreateInput {
+  id: ID
+  name: String!
+  companies: CompanyCreateManyInput
+  user: UserCreateOneWithoutWatchListsInput
+}
+
+input WatchListCreateManyWithoutUserInput {
+  create: [WatchListCreateWithoutUserInput!]
+  connect: [WatchListWhereUniqueInput!]
+}
+
+input WatchListCreateWithoutUserInput {
+  id: ID
+  name: String!
+  companies: CompanyCreateManyInput
+}
+
+type WatchListEdge {
+  node: WatchList!
+  cursor: String!
+}
+
+enum WatchListOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+}
+
+type WatchListPreviousValues {
+  id: ID!
+  name: String!
+}
+
+input WatchListScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  AND: [WatchListScalarWhereInput!]
+  OR: [WatchListScalarWhereInput!]
+  NOT: [WatchListScalarWhereInput!]
+}
+
+type WatchListSubscriptionPayload {
+  mutation: MutationType!
+  node: WatchList
+  updatedFields: [String!]
+  previousValues: WatchListPreviousValues
+}
+
+input WatchListSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: WatchListWhereInput
+  AND: [WatchListSubscriptionWhereInput!]
+  OR: [WatchListSubscriptionWhereInput!]
+  NOT: [WatchListSubscriptionWhereInput!]
+}
+
+input WatchListUpdateInput {
+  name: String
+  companies: CompanyUpdateManyInput
+  user: UserUpdateOneWithoutWatchListsInput
+}
+
+input WatchListUpdateManyDataInput {
+  name: String
+}
+
+input WatchListUpdateManyMutationInput {
+  name: String
+}
+
+input WatchListUpdateManyWithoutUserInput {
+  create: [WatchListCreateWithoutUserInput!]
+  delete: [WatchListWhereUniqueInput!]
+  connect: [WatchListWhereUniqueInput!]
+  set: [WatchListWhereUniqueInput!]
+  disconnect: [WatchListWhereUniqueInput!]
+  update: [WatchListUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [WatchListUpsertWithWhereUniqueWithoutUserInput!]
+  deleteMany: [WatchListScalarWhereInput!]
+  updateMany: [WatchListUpdateManyWithWhereNestedInput!]
+}
+
+input WatchListUpdateManyWithWhereNestedInput {
+  where: WatchListScalarWhereInput!
+  data: WatchListUpdateManyDataInput!
+}
+
+input WatchListUpdateWithoutUserDataInput {
+  name: String
+  companies: CompanyUpdateManyInput
+}
+
+input WatchListUpdateWithWhereUniqueWithoutUserInput {
+  where: WatchListWhereUniqueInput!
+  data: WatchListUpdateWithoutUserDataInput!
+}
+
+input WatchListUpsertWithWhereUniqueWithoutUserInput {
+  where: WatchListWhereUniqueInput!
+  update: WatchListUpdateWithoutUserDataInput!
+  create: WatchListCreateWithoutUserInput!
+}
+
+input WatchListWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  companies_every: CompanyWhereInput
+  companies_some: CompanyWhereInput
+  companies_none: CompanyWhereInput
+  user: UserWhereInput
+  AND: [WatchListWhereInput!]
+  OR: [WatchListWhereInput!]
+  NOT: [WatchListWhereInput!]
+}
+
+input WatchListWhereUniqueInput {
+  id: ID
+  name: String
 }
 `
       }

@@ -17,6 +17,8 @@ export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
   company: (where?: CompanyWhereInput) => Promise<boolean>;
+  user: (where?: UserWhereInput) => Promise<boolean>;
+  watchList: (where?: WatchListWhereInput) => Promise<boolean>;
 }
 
 export interface Node {}
@@ -57,6 +59,44 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => CompanyConnectionPromise;
+  user: (where: UserWhereUniqueInput) => UserNullablePromise;
+  users: (args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<User>;
+  usersConnection: (args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => UserConnectionPromise;
+  watchList: (where: WatchListWhereUniqueInput) => WatchListNullablePromise;
+  watchLists: (args?: {
+    where?: WatchListWhereInput;
+    orderBy?: WatchListOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<WatchList>;
+  watchListsConnection: (args?: {
+    where?: WatchListWhereInput;
+    orderBy?: WatchListOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => WatchListConnectionPromise;
   node: (args: { id: ID_Output }) => Node;
 
   /**
@@ -79,6 +119,38 @@ export interface Prisma {
   }) => CompanyPromise;
   deleteCompany: (where: CompanyWhereUniqueInput) => CompanyPromise;
   deleteManyCompanies: (where?: CompanyWhereInput) => BatchPayloadPromise;
+  createUser: (data: UserCreateInput) => UserPromise;
+  updateUser: (args: {
+    data: UserUpdateInput;
+    where: UserWhereUniqueInput;
+  }) => UserPromise;
+  updateManyUsers: (args: {
+    data: UserUpdateManyMutationInput;
+    where?: UserWhereInput;
+  }) => BatchPayloadPromise;
+  upsertUser: (args: {
+    where: UserWhereUniqueInput;
+    create: UserCreateInput;
+    update: UserUpdateInput;
+  }) => UserPromise;
+  deleteUser: (where: UserWhereUniqueInput) => UserPromise;
+  deleteManyUsers: (where?: UserWhereInput) => BatchPayloadPromise;
+  createWatchList: (data: WatchListCreateInput) => WatchListPromise;
+  updateWatchList: (args: {
+    data: WatchListUpdateInput;
+    where: WatchListWhereUniqueInput;
+  }) => WatchListPromise;
+  updateManyWatchLists: (args: {
+    data: WatchListUpdateManyMutationInput;
+    where?: WatchListWhereInput;
+  }) => BatchPayloadPromise;
+  upsertWatchList: (args: {
+    where: WatchListWhereUniqueInput;
+    create: WatchListCreateInput;
+    update: WatchListUpdateInput;
+  }) => WatchListPromise;
+  deleteWatchList: (where: WatchListWhereUniqueInput) => WatchListPromise;
+  deleteManyWatchLists: (where?: WatchListWhereInput) => BatchPayloadPromise;
 
   /**
    * Subscriptions
@@ -91,6 +163,12 @@ export interface Subscription {
   company: (
     where?: CompanySubscriptionWhereInput
   ) => CompanySubscriptionPayloadSubscription;
+  user: (
+    where?: UserSubscriptionWhereInput
+  ) => UserSubscriptionPayloadSubscription;
+  watchList: (
+    where?: WatchListSubscriptionWhereInput
+  ) => WatchListSubscriptionPayloadSubscription;
 }
 
 export interface ClientConstructor<T> {
@@ -118,6 +196,18 @@ export type CompanyOrderByInput =
   | "forwardPE_DESC"
   | "pegRatio_ASC"
   | "pegRatio_DESC";
+
+export type WatchListOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "name_ASC"
+  | "name_DESC";
+
+export type UserOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "username_ASC"
+  | "username_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
@@ -238,6 +328,91 @@ export interface CompanyWhereInput {
   NOT?: Maybe<CompanyWhereInput[] | CompanyWhereInput>;
 }
 
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  username?: Maybe<String>;
+}>;
+
+export interface WatchListWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  companies_every?: Maybe<CompanyWhereInput>;
+  companies_some?: Maybe<CompanyWhereInput>;
+  companies_none?: Maybe<CompanyWhereInput>;
+  user?: Maybe<UserWhereInput>;
+  AND?: Maybe<WatchListWhereInput[] | WatchListWhereInput>;
+  OR?: Maybe<WatchListWhereInput[] | WatchListWhereInput>;
+  NOT?: Maybe<WatchListWhereInput[] | WatchListWhereInput>;
+}
+
+export interface UserWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  username?: Maybe<String>;
+  username_not?: Maybe<String>;
+  username_in?: Maybe<String[] | String>;
+  username_not_in?: Maybe<String[] | String>;
+  username_lt?: Maybe<String>;
+  username_lte?: Maybe<String>;
+  username_gt?: Maybe<String>;
+  username_gte?: Maybe<String>;
+  username_contains?: Maybe<String>;
+  username_not_contains?: Maybe<String>;
+  username_starts_with?: Maybe<String>;
+  username_not_starts_with?: Maybe<String>;
+  username_ends_with?: Maybe<String>;
+  username_not_ends_with?: Maybe<String>;
+  watchLists_every?: Maybe<WatchListWhereInput>;
+  watchLists_some?: Maybe<WatchListWhereInput>;
+  watchLists_none?: Maybe<WatchListWhereInput>;
+  AND?: Maybe<UserWhereInput[] | UserWhereInput>;
+  OR?: Maybe<UserWhereInput[] | UserWhereInput>;
+  NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
+}
+
+export type WatchListWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  name?: Maybe<String>;
+}>;
+
 export interface CompanyCreateInput {
   id?: Maybe<ID_Input>;
   ticker: String;
@@ -266,6 +441,333 @@ export interface CompanyUpdateManyMutationInput {
   pegRatio?: Maybe<String>;
 }
 
+export interface UserCreateInput {
+  id?: Maybe<ID_Input>;
+  username: String;
+  watchLists?: Maybe<WatchListCreateManyWithoutUserInput>;
+}
+
+export interface WatchListCreateManyWithoutUserInput {
+  create?: Maybe<
+    WatchListCreateWithoutUserInput[] | WatchListCreateWithoutUserInput
+  >;
+  connect?: Maybe<WatchListWhereUniqueInput[] | WatchListWhereUniqueInput>;
+}
+
+export interface WatchListCreateWithoutUserInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  companies?: Maybe<CompanyCreateManyInput>;
+}
+
+export interface CompanyCreateManyInput {
+  create?: Maybe<CompanyCreateInput[] | CompanyCreateInput>;
+  connect?: Maybe<CompanyWhereUniqueInput[] | CompanyWhereUniqueInput>;
+}
+
+export interface UserUpdateInput {
+  username?: Maybe<String>;
+  watchLists?: Maybe<WatchListUpdateManyWithoutUserInput>;
+}
+
+export interface WatchListUpdateManyWithoutUserInput {
+  create?: Maybe<
+    WatchListCreateWithoutUserInput[] | WatchListCreateWithoutUserInput
+  >;
+  delete?: Maybe<WatchListWhereUniqueInput[] | WatchListWhereUniqueInput>;
+  connect?: Maybe<WatchListWhereUniqueInput[] | WatchListWhereUniqueInput>;
+  set?: Maybe<WatchListWhereUniqueInput[] | WatchListWhereUniqueInput>;
+  disconnect?: Maybe<WatchListWhereUniqueInput[] | WatchListWhereUniqueInput>;
+  update?: Maybe<
+    | WatchListUpdateWithWhereUniqueWithoutUserInput[]
+    | WatchListUpdateWithWhereUniqueWithoutUserInput
+  >;
+  upsert?: Maybe<
+    | WatchListUpsertWithWhereUniqueWithoutUserInput[]
+    | WatchListUpsertWithWhereUniqueWithoutUserInput
+  >;
+  deleteMany?: Maybe<WatchListScalarWhereInput[] | WatchListScalarWhereInput>;
+  updateMany?: Maybe<
+    | WatchListUpdateManyWithWhereNestedInput[]
+    | WatchListUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface WatchListUpdateWithWhereUniqueWithoutUserInput {
+  where: WatchListWhereUniqueInput;
+  data: WatchListUpdateWithoutUserDataInput;
+}
+
+export interface WatchListUpdateWithoutUserDataInput {
+  name?: Maybe<String>;
+  companies?: Maybe<CompanyUpdateManyInput>;
+}
+
+export interface CompanyUpdateManyInput {
+  create?: Maybe<CompanyCreateInput[] | CompanyCreateInput>;
+  update?: Maybe<
+    | CompanyUpdateWithWhereUniqueNestedInput[]
+    | CompanyUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    | CompanyUpsertWithWhereUniqueNestedInput[]
+    | CompanyUpsertWithWhereUniqueNestedInput
+  >;
+  delete?: Maybe<CompanyWhereUniqueInput[] | CompanyWhereUniqueInput>;
+  connect?: Maybe<CompanyWhereUniqueInput[] | CompanyWhereUniqueInput>;
+  set?: Maybe<CompanyWhereUniqueInput[] | CompanyWhereUniqueInput>;
+  disconnect?: Maybe<CompanyWhereUniqueInput[] | CompanyWhereUniqueInput>;
+  deleteMany?: Maybe<CompanyScalarWhereInput[] | CompanyScalarWhereInput>;
+  updateMany?: Maybe<
+    | CompanyUpdateManyWithWhereNestedInput[]
+    | CompanyUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface CompanyUpdateWithWhereUniqueNestedInput {
+  where: CompanyWhereUniqueInput;
+  data: CompanyUpdateDataInput;
+}
+
+export interface CompanyUpdateDataInput {
+  ticker?: Maybe<String>;
+  marketCap?: Maybe<String>;
+  enterpriseVal?: Maybe<String>;
+  trailingPE?: Maybe<String>;
+  forwardPE?: Maybe<String>;
+  pegRatio?: Maybe<String>;
+}
+
+export interface CompanyUpsertWithWhereUniqueNestedInput {
+  where: CompanyWhereUniqueInput;
+  update: CompanyUpdateDataInput;
+  create: CompanyCreateInput;
+}
+
+export interface CompanyScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  ticker?: Maybe<String>;
+  ticker_not?: Maybe<String>;
+  ticker_in?: Maybe<String[] | String>;
+  ticker_not_in?: Maybe<String[] | String>;
+  ticker_lt?: Maybe<String>;
+  ticker_lte?: Maybe<String>;
+  ticker_gt?: Maybe<String>;
+  ticker_gte?: Maybe<String>;
+  ticker_contains?: Maybe<String>;
+  ticker_not_contains?: Maybe<String>;
+  ticker_starts_with?: Maybe<String>;
+  ticker_not_starts_with?: Maybe<String>;
+  ticker_ends_with?: Maybe<String>;
+  ticker_not_ends_with?: Maybe<String>;
+  marketCap?: Maybe<String>;
+  marketCap_not?: Maybe<String>;
+  marketCap_in?: Maybe<String[] | String>;
+  marketCap_not_in?: Maybe<String[] | String>;
+  marketCap_lt?: Maybe<String>;
+  marketCap_lte?: Maybe<String>;
+  marketCap_gt?: Maybe<String>;
+  marketCap_gte?: Maybe<String>;
+  marketCap_contains?: Maybe<String>;
+  marketCap_not_contains?: Maybe<String>;
+  marketCap_starts_with?: Maybe<String>;
+  marketCap_not_starts_with?: Maybe<String>;
+  marketCap_ends_with?: Maybe<String>;
+  marketCap_not_ends_with?: Maybe<String>;
+  enterpriseVal?: Maybe<String>;
+  enterpriseVal_not?: Maybe<String>;
+  enterpriseVal_in?: Maybe<String[] | String>;
+  enterpriseVal_not_in?: Maybe<String[] | String>;
+  enterpriseVal_lt?: Maybe<String>;
+  enterpriseVal_lte?: Maybe<String>;
+  enterpriseVal_gt?: Maybe<String>;
+  enterpriseVal_gte?: Maybe<String>;
+  enterpriseVal_contains?: Maybe<String>;
+  enterpriseVal_not_contains?: Maybe<String>;
+  enterpriseVal_starts_with?: Maybe<String>;
+  enterpriseVal_not_starts_with?: Maybe<String>;
+  enterpriseVal_ends_with?: Maybe<String>;
+  enterpriseVal_not_ends_with?: Maybe<String>;
+  trailingPE?: Maybe<String>;
+  trailingPE_not?: Maybe<String>;
+  trailingPE_in?: Maybe<String[] | String>;
+  trailingPE_not_in?: Maybe<String[] | String>;
+  trailingPE_lt?: Maybe<String>;
+  trailingPE_lte?: Maybe<String>;
+  trailingPE_gt?: Maybe<String>;
+  trailingPE_gte?: Maybe<String>;
+  trailingPE_contains?: Maybe<String>;
+  trailingPE_not_contains?: Maybe<String>;
+  trailingPE_starts_with?: Maybe<String>;
+  trailingPE_not_starts_with?: Maybe<String>;
+  trailingPE_ends_with?: Maybe<String>;
+  trailingPE_not_ends_with?: Maybe<String>;
+  forwardPE?: Maybe<String>;
+  forwardPE_not?: Maybe<String>;
+  forwardPE_in?: Maybe<String[] | String>;
+  forwardPE_not_in?: Maybe<String[] | String>;
+  forwardPE_lt?: Maybe<String>;
+  forwardPE_lte?: Maybe<String>;
+  forwardPE_gt?: Maybe<String>;
+  forwardPE_gte?: Maybe<String>;
+  forwardPE_contains?: Maybe<String>;
+  forwardPE_not_contains?: Maybe<String>;
+  forwardPE_starts_with?: Maybe<String>;
+  forwardPE_not_starts_with?: Maybe<String>;
+  forwardPE_ends_with?: Maybe<String>;
+  forwardPE_not_ends_with?: Maybe<String>;
+  pegRatio?: Maybe<String>;
+  pegRatio_not?: Maybe<String>;
+  pegRatio_in?: Maybe<String[] | String>;
+  pegRatio_not_in?: Maybe<String[] | String>;
+  pegRatio_lt?: Maybe<String>;
+  pegRatio_lte?: Maybe<String>;
+  pegRatio_gt?: Maybe<String>;
+  pegRatio_gte?: Maybe<String>;
+  pegRatio_contains?: Maybe<String>;
+  pegRatio_not_contains?: Maybe<String>;
+  pegRatio_starts_with?: Maybe<String>;
+  pegRatio_not_starts_with?: Maybe<String>;
+  pegRatio_ends_with?: Maybe<String>;
+  pegRatio_not_ends_with?: Maybe<String>;
+  AND?: Maybe<CompanyScalarWhereInput[] | CompanyScalarWhereInput>;
+  OR?: Maybe<CompanyScalarWhereInput[] | CompanyScalarWhereInput>;
+  NOT?: Maybe<CompanyScalarWhereInput[] | CompanyScalarWhereInput>;
+}
+
+export interface CompanyUpdateManyWithWhereNestedInput {
+  where: CompanyScalarWhereInput;
+  data: CompanyUpdateManyDataInput;
+}
+
+export interface CompanyUpdateManyDataInput {
+  ticker?: Maybe<String>;
+  marketCap?: Maybe<String>;
+  enterpriseVal?: Maybe<String>;
+  trailingPE?: Maybe<String>;
+  forwardPE?: Maybe<String>;
+  pegRatio?: Maybe<String>;
+}
+
+export interface WatchListUpsertWithWhereUniqueWithoutUserInput {
+  where: WatchListWhereUniqueInput;
+  update: WatchListUpdateWithoutUserDataInput;
+  create: WatchListCreateWithoutUserInput;
+}
+
+export interface WatchListScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  AND?: Maybe<WatchListScalarWhereInput[] | WatchListScalarWhereInput>;
+  OR?: Maybe<WatchListScalarWhereInput[] | WatchListScalarWhereInput>;
+  NOT?: Maybe<WatchListScalarWhereInput[] | WatchListScalarWhereInput>;
+}
+
+export interface WatchListUpdateManyWithWhereNestedInput {
+  where: WatchListScalarWhereInput;
+  data: WatchListUpdateManyDataInput;
+}
+
+export interface WatchListUpdateManyDataInput {
+  name?: Maybe<String>;
+}
+
+export interface UserUpdateManyMutationInput {
+  username?: Maybe<String>;
+}
+
+export interface WatchListCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  companies?: Maybe<CompanyCreateManyInput>;
+  user?: Maybe<UserCreateOneWithoutWatchListsInput>;
+}
+
+export interface UserCreateOneWithoutWatchListsInput {
+  create?: Maybe<UserCreateWithoutWatchListsInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserCreateWithoutWatchListsInput {
+  id?: Maybe<ID_Input>;
+  username: String;
+}
+
+export interface WatchListUpdateInput {
+  name?: Maybe<String>;
+  companies?: Maybe<CompanyUpdateManyInput>;
+  user?: Maybe<UserUpdateOneWithoutWatchListsInput>;
+}
+
+export interface UserUpdateOneWithoutWatchListsInput {
+  create?: Maybe<UserCreateWithoutWatchListsInput>;
+  update?: Maybe<UserUpdateWithoutWatchListsDataInput>;
+  upsert?: Maybe<UserUpsertWithoutWatchListsInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserUpdateWithoutWatchListsDataInput {
+  username?: Maybe<String>;
+}
+
+export interface UserUpsertWithoutWatchListsInput {
+  update: UserUpdateWithoutWatchListsDataInput;
+  create: UserCreateWithoutWatchListsInput;
+}
+
+export interface WatchListUpdateManyMutationInput {
+  name?: Maybe<String>;
+}
+
 export interface CompanySubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
@@ -275,6 +777,34 @@ export interface CompanySubscriptionWhereInput {
   AND?: Maybe<CompanySubscriptionWhereInput[] | CompanySubscriptionWhereInput>;
   OR?: Maybe<CompanySubscriptionWhereInput[] | CompanySubscriptionWhereInput>;
   NOT?: Maybe<CompanySubscriptionWhereInput[] | CompanySubscriptionWhereInput>;
+}
+
+export interface UserSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<UserWhereInput>;
+  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+}
+
+export interface WatchListSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<WatchListWhereInput>;
+  AND?: Maybe<
+    WatchListSubscriptionWhereInput[] | WatchListSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    WatchListSubscriptionWhereInput[] | WatchListSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    WatchListSubscriptionWhereInput[] | WatchListSubscriptionWhereInput
+  >;
 }
 
 export interface NodeNode {
@@ -406,6 +936,221 @@ export interface AggregateCompanySubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
+export interface User {
+  id: ID_Output;
+  username: String;
+}
+
+export interface UserPromise extends Promise<User>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  username: () => Promise<String>;
+  watchLists: <T = FragmentableArray<WatchList>>(args?: {
+    where?: WatchListWhereInput;
+    orderBy?: WatchListOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface UserSubscription
+  extends Promise<AsyncIterator<User>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  username: () => Promise<AsyncIterator<String>>;
+  watchLists: <T = Promise<AsyncIterator<WatchListSubscription>>>(args?: {
+    where?: WatchListWhereInput;
+    orderBy?: WatchListOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface UserNullablePromise
+  extends Promise<User | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  username: () => Promise<String>;
+  watchLists: <T = FragmentableArray<WatchList>>(args?: {
+    where?: WatchListWhereInput;
+    orderBy?: WatchListOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface WatchList {
+  id: ID_Output;
+  name: String;
+}
+
+export interface WatchListPromise extends Promise<WatchList>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  companies: <T = FragmentableArray<Company>>(args?: {
+    where?: CompanyWhereInput;
+    orderBy?: CompanyOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  user: <T = UserPromise>() => T;
+}
+
+export interface WatchListSubscription
+  extends Promise<AsyncIterator<WatchList>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  companies: <T = Promise<AsyncIterator<CompanySubscription>>>(args?: {
+    where?: CompanyWhereInput;
+    orderBy?: CompanyOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  user: <T = UserSubscription>() => T;
+}
+
+export interface WatchListNullablePromise
+  extends Promise<WatchList | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  companies: <T = FragmentableArray<Company>>(args?: {
+    where?: CompanyWhereInput;
+    orderBy?: CompanyOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  user: <T = UserPromise>() => T;
+}
+
+export interface UserConnection {
+  pageInfo: PageInfo;
+  edges: UserEdge[];
+}
+
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
+}
+
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
+}
+
+export interface UserEdge {
+  node: User;
+  cursor: String;
+}
+
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
+    Fragmentable {
+  node: <T = UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateUser {
+  count: Int;
+}
+
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface WatchListConnection {
+  pageInfo: PageInfo;
+  edges: WatchListEdge[];
+}
+
+export interface WatchListConnectionPromise
+  extends Promise<WatchListConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<WatchListEdge>>() => T;
+  aggregate: <T = AggregateWatchListPromise>() => T;
+}
+
+export interface WatchListConnectionSubscription
+  extends Promise<AsyncIterator<WatchListConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<WatchListEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateWatchListSubscription>() => T;
+}
+
+export interface WatchListEdge {
+  node: WatchList;
+  cursor: String;
+}
+
+export interface WatchListEdgePromise
+  extends Promise<WatchListEdge>,
+    Fragmentable {
+  node: <T = WatchListPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface WatchListEdgeSubscription
+  extends Promise<AsyncIterator<WatchListEdge>>,
+    Fragmentable {
+  node: <T = WatchListSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateWatchList {
+  count: Int;
+}
+
+export interface AggregateWatchListPromise
+  extends Promise<AggregateWatchList>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateWatchListSubscription
+  extends Promise<AsyncIterator<AggregateWatchList>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
 export interface BatchPayload {
   count: Long;
 }
@@ -484,6 +1229,94 @@ export interface CompanyPreviousValuesSubscription
   pegRatio: () => Promise<AsyncIterator<String>>;
 }
 
+export interface UserSubscriptionPayload {
+  mutation: MutationType;
+  node: User;
+  updatedFields: String[];
+  previousValues: UserPreviousValues;
+}
+
+export interface UserSubscriptionPayloadPromise
+  extends Promise<UserSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = UserPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = UserPreviousValuesPromise>() => T;
+}
+
+export interface UserSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = UserSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = UserPreviousValuesSubscription>() => T;
+}
+
+export interface UserPreviousValues {
+  id: ID_Output;
+  username: String;
+}
+
+export interface UserPreviousValuesPromise
+  extends Promise<UserPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  username: () => Promise<String>;
+}
+
+export interface UserPreviousValuesSubscription
+  extends Promise<AsyncIterator<UserPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  username: () => Promise<AsyncIterator<String>>;
+}
+
+export interface WatchListSubscriptionPayload {
+  mutation: MutationType;
+  node: WatchList;
+  updatedFields: String[];
+  previousValues: WatchListPreviousValues;
+}
+
+export interface WatchListSubscriptionPayloadPromise
+  extends Promise<WatchListSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = WatchListPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = WatchListPreviousValuesPromise>() => T;
+}
+
+export interface WatchListSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<WatchListSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = WatchListSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = WatchListPreviousValuesSubscription>() => T;
+}
+
+export interface WatchListPreviousValues {
+  id: ID_Output;
+  name: String;
+}
+
+export interface WatchListPreviousValuesPromise
+  extends Promise<WatchListPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+}
+
+export interface WatchListPreviousValuesSubscription
+  extends Promise<AsyncIterator<WatchListPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+}
+
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
 */
@@ -524,6 +1357,14 @@ export type Long = string;
 export const models: Model[] = [
   {
     name: "Company",
+    embedded: false
+  },
+  {
+    name: "WatchList",
+    embedded: false
+  },
+  {
+    name: "User",
     embedded: false
   }
 ];
