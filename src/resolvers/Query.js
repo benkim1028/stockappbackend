@@ -2,7 +2,8 @@ const mutation = require('./Mutation');
 
 async function getCompanyByTicker(root, args, context, info) {
     let company = await context.prisma.company({ticker: args.ticker});
-    if (company == null) company = await mutation.getCompany(root, args, context);
+    let updatedAt = company.updatedAt;
+    if (company == null || _olderThanOneDay(updatedAt)) company = await mutation.getCompany(root, args, context);
     let watchlist = await context.prisma.updateWatchList({
         where: {name: args.watchlistName},
         data: {
@@ -27,9 +28,23 @@ function getUser(root, args, context, info) {
     })
 }
 
-function getCompaniesByWatchlistName(root, args, context, info) {
-    let companies = context.prisma.watchList({name: args.name}).companies();
+async function getCompaniesByWatchlistName(root, args, context, info) {
+    let companies = await context.prisma.watchList({name: args.name}).companies();
+    for(let i = 0; i < companies.length; i++){
+        let updatedAt = companies[i].updatedAt;
+        if(_olderThanOneDay(updatedAt)){
+            let company = await mutation.getCompany(root, {ticker: companies[i].ticker}, context, info);
+            companies[i] = company;
+        }
+    }
     return companies;
+}
+
+function _olderThanOneDay(date){
+    let newDate = new Date()
+    let oldDate = new Date(date);
+    newDate.setDate(newDate.getDate() - 1);
+    return oldDate < newDate;
 }
 
 module.exports = {

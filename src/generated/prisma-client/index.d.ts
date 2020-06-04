@@ -195,7 +195,9 @@ export type CompanyOrderByInput =
   | "forwardPE_ASC"
   | "forwardPE_DESC"
   | "pegRatio_ASC"
-  | "pegRatio_DESC";
+  | "pegRatio_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
 
 export type WatchListOrderByInput =
   | "id_ASC"
@@ -323,6 +325,14 @@ export interface CompanyWhereInput {
   pegRatio_not_starts_with?: Maybe<String>;
   pegRatio_ends_with?: Maybe<String>;
   pegRatio_not_ends_with?: Maybe<String>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
   AND?: Maybe<CompanyWhereInput[] | CompanyWhereInput>;
   OR?: Maybe<CompanyWhereInput[] | CompanyWhereInput>;
   NOT?: Maybe<CompanyWhereInput[] | CompanyWhereInput>;
@@ -651,6 +661,14 @@ export interface CompanyScalarWhereInput {
   pegRatio_not_starts_with?: Maybe<String>;
   pegRatio_ends_with?: Maybe<String>;
   pegRatio_not_ends_with?: Maybe<String>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
   AND?: Maybe<CompanyScalarWhereInput[] | CompanyScalarWhereInput>;
   OR?: Maybe<CompanyScalarWhereInput[] | CompanyScalarWhereInput>;
   NOT?: Maybe<CompanyScalarWhereInput[] | CompanyScalarWhereInput>;
@@ -820,6 +838,7 @@ export interface Company {
   trailingPE: String;
   forwardPE: String;
   pegRatio: String;
+  updatedAt: DateTimeOutput;
 }
 
 export interface CompanyPromise extends Promise<Company>, Fragmentable {
@@ -831,6 +850,7 @@ export interface CompanyPromise extends Promise<Company>, Fragmentable {
   trailingPE: () => Promise<String>;
   forwardPE: () => Promise<String>;
   pegRatio: () => Promise<String>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface CompanySubscription
@@ -844,6 +864,7 @@ export interface CompanySubscription
   trailingPE: () => Promise<AsyncIterator<String>>;
   forwardPE: () => Promise<AsyncIterator<String>>;
   pegRatio: () => Promise<AsyncIterator<String>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface CompanyNullablePromise
@@ -857,6 +878,7 @@ export interface CompanyNullablePromise
   trailingPE: () => Promise<String>;
   forwardPE: () => Promise<String>;
   pegRatio: () => Promise<String>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface CompanyConnection {
@@ -1201,6 +1223,7 @@ export interface CompanyPreviousValues {
   trailingPE: String;
   forwardPE: String;
   pegRatio: String;
+  updatedAt: DateTimeOutput;
 }
 
 export interface CompanyPreviousValuesPromise
@@ -1214,6 +1237,7 @@ export interface CompanyPreviousValuesPromise
   trailingPE: () => Promise<String>;
   forwardPE: () => Promise<String>;
   pegRatio: () => Promise<String>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface CompanyPreviousValuesSubscription
@@ -1227,6 +1251,7 @@ export interface CompanyPreviousValuesSubscription
   trailingPE: () => Promise<AsyncIterator<String>>;
   forwardPE: () => Promise<AsyncIterator<String>>;
   pegRatio: () => Promise<AsyncIterator<String>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface UserSubscriptionPayload {

@@ -2,6 +2,7 @@ var puppeteer = require('puppeteer');
 
 module.exports = {
     getQuote: async function(ticker){
+        console.log("Yahoo_Finance - Getting information of " + ticker);
         const browser = await puppeteer.launch({
             headless:true,
             args: ['--no-sandbox', '--disable-setuid-sandbox']
@@ -35,6 +36,7 @@ module.exports = {
             return dataJson;
         });
         await browser.close();
+        response["ticker"] = ticker;
         return response;
     }
 }

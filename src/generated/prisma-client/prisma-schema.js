@@ -28,6 +28,7 @@ type Company {
   trailingPE: String!
   forwardPE: String!
   pegRatio: String!
+  updatedAt: DateTime!
 }
 
 type CompanyConnection {
@@ -73,6 +74,8 @@ enum CompanyOrderByInput {
   forwardPE_DESC
   pegRatio_ASC
   pegRatio_DESC
+  updatedAt_ASC
+  updatedAt_DESC
 }
 
 type CompanyPreviousValues {
@@ -84,6 +87,7 @@ type CompanyPreviousValues {
   trailingPE: String!
   forwardPE: String!
   pegRatio: String!
+  updatedAt: DateTime!
 }
 
 input CompanyScalarWhereInput {
@@ -193,6 +197,14 @@ input CompanyScalarWhereInput {
   pegRatio_not_starts_with: String
   pegRatio_ends_with: String
   pegRatio_not_ends_with: String
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [CompanyScalarWhereInput!]
   OR: [CompanyScalarWhereInput!]
   NOT: [CompanyScalarWhereInput!]
@@ -387,6 +399,14 @@ input CompanyWhereInput {
   pegRatio_not_starts_with: String
   pegRatio_ends_with: String
   pegRatio_not_ends_with: String
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [CompanyWhereInput!]
   OR: [CompanyWhereInput!]
   NOT: [CompanyWhereInput!]

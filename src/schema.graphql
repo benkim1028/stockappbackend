@@ -7,8 +7,11 @@ type Query {
 
 type Mutation {
   getCompany(ticker: String!): Company!
+  getCompanies(ticker: [String]!): [Company]!
   createWatchList(name: String!, username: String!) : WatchList!
   createUser(username: String!) : User!
+  deleteCompanyFromWatchList(name: String!, tickers: [String]!) : WatchList!
+  deleteWatchListFromUser(watchlistName: String!) : WatchList!
 }
 
 type User {

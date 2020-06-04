@@ -7,6 +7,7 @@ type Company {
   trailingPE: String!
   forwardPE: String!
   pegRatio: String!
+  updatedAt: DateTime! @updatedAt
 }
 
 type WatchList {
@@ -20,4 +21,5 @@ type User {
   id: ID! @id
   username: String! @unique
   watchLists: [WatchList]
+
 }
